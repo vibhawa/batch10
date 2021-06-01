@@ -1,0 +1,23 @@
+---
+- hosts: SlaveNode
+  become: true
+  tasks:
+  - name: Install Java JDK
+    apt:
+      pkg: default-jdk
+      state: present
+  - name: Install Java JRE
+    apt:
+      pkg: default-jre
+      state: present
+  - name: Install Docker
+    apt:
+      pkg: docker.io
+      state: present
+  - name: Start Docker services
+    service:
+      name: docker
+      state: started
+      enabled: true
+  - name: deploy addressbook application
+    command: sudo docker run -d -p 8888:8888 diablonemesis/casestudy:1.0
