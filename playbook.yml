@@ -4,6 +4,7 @@
   tasks:
   - name: Install Docker
     apt:
+      update_cache: yes
       pkg: docker.io
       state: present
   - name: Start Docker services
